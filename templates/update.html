@@ -1,0 +1,36 @@
+{% extends 'main_template.html' %}
+
+{% block scriptBlock %}
+    <script>
+        $(function () {
+            // 获取当前 URL 的查询部分（问号 ? 之后的部分）
+            var info = $('#note_info').val();
+
+            // 输入框获得焦点清空内容
+            $('#note_info').focus(function () {
+                $(this).val('')
+            })
+
+            // 点击修改发送数据
+            $('#update').click(function () {
+                if ($('#note_info').val() == info) {
+                    alert('请先修改内容')
+                    return
+                } else {
+                    var newInfo = $('#note_info').val()
+                    window.location.href = "/update/{{ code_id }}?info=" + newInfo
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block tableBlock %}
+    <div class="input-group">
+        <span class="input-group-addon">正在修改：</span>
+        <span class="input-group-addon" id="code">{{ code_id }}</span>
+        <input id="note_info" type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+               value="{{ focus_info }}">
+        <span id="update" class="input-group-addon" style="cursor: pointer">修改</span>
+    </div>
+{% endblock %}

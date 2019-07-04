@@ -1,0 +1,34 @@
+{% extends 'main_template.html' %}
+
+{% block tableBlock %}
+    <table class="table table-hover">
+        <tr>
+            <th>序号</th>
+            <th>股票代码</th>
+            <th>股票简称</th>
+            <th>涨跌幅</th>
+            <th>换手率</th>
+            <th>最新价(元)</th>
+            <th>前期高点</th>
+            <th>前期高点日期</th>
+            <th>添加自选</th>
+        </tr>
+        {% for foo in info %}
+            <tr>
+                <td>{{ foo.id }}</td>
+                <td>{{ foo.code }}</td>
+                <td>{{ foo.short }}</td>
+                <td>{{ foo.chg }}</td>
+                <td>{{ foo.turnover }}</td>
+                <td>{{ foo.price }}</td>
+                <td>{{ foo.highs }}</td>
+                <td>{{ foo.time }}</td>
+                <td><a href="/index/{{ foo.code }}"><input type="button" value="添加" id="toAdd" name="toAdd"></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {{ alert | safe }}
+{% endblock %}
+
+

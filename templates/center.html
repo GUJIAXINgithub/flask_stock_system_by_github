@@ -1,0 +1,35 @@
+{% extends 'main_template.html' %}
+
+{% block tableBlock %}
+    <table class="table table-hover">
+        <tr>
+            <th>股票代码</th>
+            <th>股票简称</th>
+            <th>涨跌幅</th>
+            <th>换手率</th>
+            <th>最新价(元)</th>
+            <th>前期高点</th>
+            <th style="color:red">备注信息</th>
+            <th>修改备注</th>
+            <th>del</th>
+        </tr>
+        {% for foo in info %}
+            <tr>
+                <td>{{ foo.code }}</td>
+                <td>{{ foo.short }}</td>
+                <td>{{ foo.chg }}</td>
+                <td>{{ foo.turnover }}</td>
+                <td>{{ foo.price }}</td>
+                <td>{{ foo.highs }}</td>
+                <td>{{ foo.focus.first().note_info }}</td>
+                <td><a type="button" class="btn btn-default btn-xs" href="/update/{{ foo.code }}"><span
+                        class="glyphicon glyphicon-star" aria-hidden="true"></span> 修改 </a></td>
+                <td><a href="/center/{{ foo.code }}"><input type="button" value="删除" id="toDel"
+                                                            name="toDel"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {{ alert | safe }}
+{% endblock %}
+
+
